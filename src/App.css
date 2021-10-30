@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+#navbar {
+  position: absolute;
+}
+
+.pro-sidebar {
+  height: 100vh;
+}
+
+#contentbar {
+  margin-left: 270px;
+  padding-left: 10px;
+}
