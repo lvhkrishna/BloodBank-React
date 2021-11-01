@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button } from "@mui/material";
+import { Table } from "semantic-ui-react"
 
 function BloodForm() {
     const[groupText, setGroupText] = useState("");
@@ -15,9 +16,10 @@ function BloodForm() {
 
     return(
         <div>
-            <div style={{border: "1px solid #2BA84A", display: "inline-block", padding: "5px", boxShadow: "5px 5px #2BA84A"}}>
-                <TextField label="Blood Group" value={groupText} onChange={onGroupChange} />
-                <Button variant="outlined" size="large" onClick={onSubmit} style={{marginLeft: "20px"}}>Add</Button>
+            <div style={{border: "1px solid #2BA84A", boxShadow: "5px 5px #2BA84A", display: "inline-block", padding: "5px"}}>
+                <TextField label="Blood Group" variant="filled" value={groupText}
+                    size="small" onChange={onGroupChange} />
+                <Button variant="outlined" size="medium" onClick={onSubmit} style={{marginLeft: "20px"}}>Add</Button>
             </div>
         </div>
     )
@@ -43,7 +45,25 @@ function BloodInfo() {
 
     return(
         <div>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            <Table celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Blood Group</Table.HeaderCell>
+                            <Table.HeaderCell>Units Available</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Body>
+                    {data.map(el => {
+                        return (
+                        <Table.Row>
+                            <Table.Cell>{el.bloodGroup}</Table.Cell>
+                            <Table.Cell>{el.unitsAvailable}</Table.Cell>
+                        </Table.Row>
+                        );
+                    })}
+                    </Table.Body>
+                </Table>
         </div>
     );
 }
@@ -52,7 +72,7 @@ function Blood() {
     return(
         <>
             <h1>Blood Groups</h1>
-            <BloodForm />
+            <BloodForm /> <br />
             <BloodInfo />
         </>
     );
